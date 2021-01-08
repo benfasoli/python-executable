@@ -39,12 +39,14 @@ jobs:
       - name: Build with pyinstaller
         run: |
           pyinstaller --onefile --name=$APP_NAME main.py
-          pwd
-          ls
+          echo "dist files"
           ls dist
+          echo "path"
+          echo dist/${{ env.APP_NAME }}
 
       - name: Upload executable
         uses: actions/upload-artifact@v2
         with:
           name: app
           path: dist/${{ env.APP_NAME }}
+          if-no-files-found: error
