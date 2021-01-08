@@ -43,5 +43,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: ./dist/
+          path: ${{ github.workspace }}/app/dist/${{ env.APP_NAME }}
           if-no-files-found: error
