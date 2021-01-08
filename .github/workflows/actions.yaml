@@ -37,11 +37,13 @@ jobs:
         run: pytest
 
       - name: Build with pyinstaller
+        run: pyinstaller --onefile --name=$APP_NAME main.py
+
+      - name: Print paths
         run: |
-          pyinstaller --onefile --name=$APP_NAME main.py
-          echo "dist files"
+          echo "ls dist/"
           ls dist
-          echo "path"
+          echo "searching for:"
           echo dist/${{ env.APP_NAME }}
 
       - name: Upload executable
