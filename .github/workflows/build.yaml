@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 defaults:
   run:
+    shell: bash
     working-directory: app
 
 jobs:
@@ -42,8 +43,17 @@ jobs:
 
       - name: Prepare artifacts
         working-directory: ${{ github.workspace }}
-        shell: bash
         run: mv app/dist/app app-${{ matrix.os }}
+
+      - name: Debug artifacts
+        working-directory: ${{ github.workspace }}
+        run: |
+          echo "pwd:"
+          pwd
+          echo "ls:"
+          ls
+          echo "find .:"
+          find .
 
       - name: Deploy artifacts
         uses: actions/upload-artifact@v2
