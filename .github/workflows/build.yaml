@@ -41,15 +41,15 @@ jobs:
       - name: Build with pyinstaller
         run: pyinstaller --onefile --name=app-${{ matrix.os }} main.py
 
-      - name: Prepare artifacts
-        working-directory: ${{ github.workspace }}
-        run: mv app/dist/app-${{ matrix.os }}* .
+      # - name: Prepare artifacts
+      #   working-directory: ${{ github.workspace }}
+      #   run: mv app/dist/app-${{ matrix.os }}* .
 
       - name: Deploy artifacts
         uses: actions/upload-artifact@v2
         with:
           name: app-${{ matrix.os }}
-          path: app-${{ matrix.os }}*
+          path: app/dist/app-${{ matrix.os }}*
           if-no-files-found: error
 
       # - name: Upload release asset
