@@ -30,9 +30,8 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller pytest
-          [ -f requirements.txt ] && pip install -r requirements.txt
+          python -m pip install --upgrade pip pyinstaller pytest
+          pip install -r requirements.txt
 
       - name: Test with pytest
         run: pytest
@@ -44,4 +43,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: dist/$${{ env.APP_NAME }}
+          path: dist/${{ env.APP_NAME }}
