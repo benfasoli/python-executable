@@ -18,7 +18,7 @@ jobs:
           - 'x64'
           - 'x86'
         python-version:
-          - '3.x'
+          - '3.8.7'
 
     runs-on: ${{ matrix.os }}
 
