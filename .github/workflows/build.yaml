@@ -39,27 +39,17 @@ jobs:
         run: pytest
 
       - name: Build with pyinstaller
-        run: pyinstaller --onefile --name=app main.py
+        run: pyinstaller --onefile --name=app-${{ matrix.os }} main.py
 
       - name: Prepare artifacts
         working-directory: ${{ github.workspace }}
-        run: mv app/dist/app app-${{ matrix.os }}
-
-      - name: Debug artifacts
-        working-directory: ${{ github.workspace }}
-        run: |
-          echo "pwd:"
-          pwd
-          echo "ls:"
-          ls
-          echo "find .:"
-          find .
+        run: mv app/dist/app-${{ matrix.os }}* .
 
       - name: Deploy artifacts
         uses: actions/upload-artifact@v2
         with:
           name: app-${{ matrix.os }}
-          path: app-${{ matrix.os }}
+          path: app-${{ matrix.os }}*
           if-no-files-found: error
 
       # - name: Upload release asset
