@@ -38,12 +38,13 @@ jobs:
         run: pytest
 
       - name: Build with pyinstaller
-        run: pyinstaller --onefile --name=app main.py
+        run: pyinstaller --onefile --distpath=. --name=app main.py
 
       - name: Upload executable
         uses: actions/upload-artifact@v2
         with:
           name: app-${{ matrix.os }}
           # path: ${{ github.workspace }}${{ env.sep }}app${{ env.sep }}dist${{ env.sep }}app
-          path: ${{ join([github.workspace, 'app', 'dist', 'app'], runner.os == "Windows" && '\' || '/') }}
+          # path: ${{ join([github.workspace, 'app', 'dist', 'app'], runner.os == "Windows" && '\' || '/') }}
+          path: app
           if-no-files-found: error
